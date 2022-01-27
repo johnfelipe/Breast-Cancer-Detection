@@ -26,7 +26,7 @@ def main():
   image=gr.inputs.Image(shape=(224,224))
   label=gr.outputs.Label(num_top_classes=8)
   
-  class_name=['Benign with Density=1','Malignant with Density=1','Benign with Density=2','Malignant with Density=2','Benign with Density=3','Malignant with Density=3','Benign with Density=4','Malignant with Density=4']
+  class_name=['Benigno con densidad=1','Maligno con densidad=1','Benigno con densidad=2','Maligno con densidad=2','Benigno con densidad=3','Maligno con densidad=3','Benigno con densidad=4','Maligno con densidad=4']
   
   def predict_img(img):
     img=preprocess(img)
@@ -35,7 +35,7 @@ def main():
     pred=model.predict(im)[0]
     return {class_name[i]:float(pred[i]) for i in range(8)}
   
-  gr.Interface(fn=predict_img,inputs=image,outputs=label,capture_session=True).launch(debug='True',share=True)
+  gr.Interface(fn=predict_img,inputs=image,outputs=label,capture_session=True).launch(debug='True',share=True,server_name="0.0.0.0")
   
 if __name__=='__main__':
     main()
